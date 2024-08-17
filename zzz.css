@@ -1,0 +1,86 @@
+#tunediv1 {
+    text-align: center;
+    background-color:#F2E7DC;
+    padding: 1.5vw;
+    padding-left: 5vw;
+    margin: -1.75vw -1.5vw 0 -1.5vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+div.selectheadphone, #tunediv2, #demodiv1, #demodiv5, #volumediv1 {
+    margin-top: 20px;
+    padding: 50px;
+    border-radius: 20px;
+    background-color: #c7c7c5;
+}
+
+#demodiv2 {
+    display:flex; 
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+
+body {
+    margin: 20px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: black;
+    color:#130f40;
+}
+
+#tuneh1 {
+    font-size: 50px;
+    text-align: center;
+}
+
+#tuneNavBar{
+    list-style-type: none;
+    padding: 0.5vw 2vw 0 0;
+}
+
+#tuneNav{
+    display: inline;
+    padding: 0.5vw 1vw 0.5vw 1vw;
+    float: right;
+}
+
+#tuneNav:hover{
+    background-color: white;
+}
+
+#tuneLinkHome, #tuneLinkInfo{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+#tuneNavInfoDropDown{
+    position: relative;
+    display: inline-block;
+}
+
+#tuneNavInfoDropDownContent{
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    margin-top: 0.5vw;
+    right: -2.8vw;
+}
+
+#tuneNavInfoDropDown:hover #tuneNavInfoDropDownContent{
+    display: block;
+}
+
+#tuneNavInfoDropDownContent a{
+    text-decoration: none;
+    display: block;
+    color: black;
+    padding: 1vw 1vw 1vw 1vw;
+}
+
+#tuneNavInfoDropDownContent a:hover{
+    background-color: #f1f1f1;
+}
