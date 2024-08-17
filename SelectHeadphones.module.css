@@ -1,0 +1,9 @@
+/* styling for selectheadphone div in select-headphones.js*/
+
+.selectheadphone {
+    margin-top: 20px;
+    padding: 50px;
+    border-radius: 20px;
+    background-color: #c7c7c5;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
