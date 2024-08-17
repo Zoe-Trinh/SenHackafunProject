@@ -9,7 +9,7 @@ export default function HeadphoneTuning({ csvData }) {
 
     return (
         <div>
-            <h1>Tuning for {headphone}</h1>
+            <h1>{headphone}</h1>
 
             <audio controls>
                 <source src="/data/Barney.mp3" type="audio/mpeg" />
