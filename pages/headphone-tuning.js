@@ -148,9 +148,10 @@ export default function HeadphoneTuning({ eqFiles }) {
         const winner = currentPair[selectedEQ === 'A' ? 0 : 1];
         setWinners([...winners, winner]);
         handleStop();
-    
+
         if (round === 7) {
-            router.push(`/listen?headphone=${router.query.headphone}&tuning=${winner.name}`);
+            alert(`Your favorite EQ is: ${winner.name}`);
+
         } else {
             setRound(round + 1);
             const nextPairIndex = round < 4 ? round : round - 4;
