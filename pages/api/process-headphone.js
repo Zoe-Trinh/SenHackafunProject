@@ -25,16 +25,16 @@ export default async function handler(req, res) {
     const targetsDir = path.join(process.cwd(), 'public/data/targets');
     const outputDir = path.join(process.cwd(), 'public/data/temp_eqs');
 
-    // Ensure the output directory exists
+
     if (!fs.existsSync(outputDir)) {
         fs.mkdirSync(outputDir, { recursive: true });
     }
 
-    // Load the headphone measurement CSV
+
     const headphoneCsvPath = path.join(measurementsDir, `${headphone}.csv`);
     const headphoneFr = parseCsv(headphoneCsvPath);
 
-    // Load all target CSV files
+
     const targetFiles = fs.readdirSync(targetsDir).filter(filename => filename.endsWith('.csv'));
     const results = [];
 
@@ -43,19 +43,19 @@ export default async function handler(req, res) {
         const targetCsvPath = path.join(targetsDir, targetFile);
         const targetFr = parseCsv(targetCsvPath);
 
-        // Apply AutoEQ
+
         const maxFilters = 10;
         const filters = Equalizer.autoeq(headphoneFr, targetFr, maxFilters);
         const output = formatFilters(filters);
 
-        // Store the generated EQ in a file
+
         const outputFilePath = path.join(outputDir, `${headphone}-${targetName}.txt`);
         fs.writeFileSync(outputFilePath, output, 'utf8');
 
         results.push({ target: targetName, outputFilePath });
     });
 
-    // Add a blank tuning result
+
     const blankTuning = {
         target: 'Blank Tuning',
         output: formatFilters([

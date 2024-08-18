@@ -5,7 +5,7 @@ export default function SelectHeadphones() {
     const [headphones, setHeadphones] = useState([]);
     const [filteredHeadphones, setFilteredHeadphones] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [loading, setLoading] = useState(false);  // Loading state
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -30,14 +30,14 @@ export default function SelectHeadphones() {
         const selectedHeadphone = event.target.value;
 
         if (selectedHeadphone) {
-            setLoading(true);  // Set loading to true when headphone is selected
+            setLoading(true);
 
-            // Call the API route to process the headphone and targets
+
             const response = await fetch(`/api/process-headphone?headphone=${selectedHeadphone}`);
             if (response.ok) {
                 router.push(`/headphone-tuning?headphone=${selectedHeadphone}`);
             } else {
-                setLoading(false);  // Reset loading if something goes wrong
+                setLoading(false); 
             }
         }
     };
