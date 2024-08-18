@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { useRouter } from 'next/router';
 
-export default function HeadphoneTuning({ csvData, eqFiles }) {
+export default function HeadphoneTuning({ eqFiles }) {
     const [audioContext, setAudioContext] = useState(null);
     const [source, setSource] = useState(null);
     const [currentEQ, setCurrentEQ] = useState([]);
@@ -193,21 +193,17 @@ export default function HeadphoneTuning({ csvData, eqFiles }) {
 }
 
 export async function getServerSideProps(context) {
-    const eqDir = path.join(process.cwd(), 'public/data/sample_eqs');
+    const { headphone } = context.query;
+    const eqDir = path.join(process.cwd(), 'public/data/temp_eqs');
     const eqFiles = fs.readdirSync(eqDir)
-        .filter((file) => file.endsWith('.txt'))
+        .filter((file) => file.startsWith(`${headphone}-`))
         .map((file) => ({
             name: file,
             content: fs.readFileSync(path.join(eqDir, file), 'utf-8'),
         }));
 
-    const { headphone } = context.query;
-    const filePath = path.join(process.cwd(), 'public/data/measurements', `${headphone}.csv`);
-    const csvData = fs.readFileSync(filePath, 'utf-8');
-
     return {
         props: {
-            csvData,
             eqFiles,
         },
     };

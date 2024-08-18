@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import Equalizer from '../../utils/equalizer';
 
-// Function to parse CSV file into an array of [frequency, gain] pairs
 function parseCsv(filepath) {
     const data = fs.readFileSync(filepath, 'utf8');
     return data.split('\n').map(line => {
@@ -11,7 +10,6 @@ function parseCsv(filepath) {
     }).filter(pair => !isNaN(pair[0]) && !isNaN(pair[1]));
 }
 
-// Function to format the filters into the desired output format
 function formatFilters(filters) {
     const fixedPreamp = -10.0; // Fixed preamp value
     const lines = [`Preamp: ${fixedPreamp.toFixed(1)} dB`];
@@ -21,28 +19,52 @@ function formatFilters(filters) {
     return lines.join('\n');
 }
 
-
-export default function handler(req, res) {
+export default async function handler(req, res) {
     const { headphone } = req.query;
-
-    // Path to the headphone and target CSV files
-    const headphoneCsvPath = path.join(process.cwd(), 'public/data/measurements', `${headphone}.csv`);
+    const measurementsDir = path.join(process.cwd(), 'public/data/measurements');
     const targetsDir = path.join(process.cwd(), 'public/data/targets');
+    const outputDir = path.join(process.cwd(), 'public/data/temp_eqs');
 
-    const headphoneData = parseCsv(headphoneCsvPath);
+    // Ensure the output directory exists
+    if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+    }
+
+    // Load the headphone measurement CSV
+    const headphoneCsvPath = path.join(measurementsDir, `${headphone}.csv`);
+    const headphoneFr = parseCsv(headphoneCsvPath);
+
+    // Load all target CSV files
     const targetFiles = fs.readdirSync(targetsDir).filter(filename => filename.endsWith('.csv'));
+    const results = [];
 
-    const results = targetFiles.map(targetFile => {
-        const targetData = parseCsv(path.join(targetsDir, targetFile));
-        const filters = Equalizer.autoeq(headphoneData, targetData, 10);
-        const preamp = Equalizer.calc_preamp(headphoneData, Equalizer.apply(headphoneData, filters));
-        const output = formatFilters(filters, preamp);
-        
-        return {
-            target: targetFile.replace('.csv', ''),
-            output
-        };
+    targetFiles.forEach(targetFile => {
+        const targetName = targetFile.replace('.csv', '');
+        const targetCsvPath = path.join(targetsDir, targetFile);
+        const targetFr = parseCsv(targetCsvPath);
+
+        // Apply AutoEQ
+        const maxFilters = 10;
+        const filters = Equalizer.autoeq(headphoneFr, targetFr, maxFilters);
+        const output = formatFilters(filters);
+
+        // Store the generated EQ in a file
+        const outputFilePath = path.join(outputDir, `${headphone}-${targetName}.txt`);
+        fs.writeFileSync(outputFilePath, output, 'utf8');
+
+        results.push({ target: targetName, outputFilePath });
     });
+
+    // Add a blank tuning result
+    const blankTuning = {
+        target: 'Blank Tuning',
+        output: formatFilters([
+            { type: 'PK', freq: 40, gain: 0.0, q: 1.000 }
+        ])
+    };
+    const blankFilePath = path.join(outputDir, `${headphone}-blank.txt`);
+    fs.writeFileSync(blankFilePath, blankTuning.output, 'utf8');
+    results.push({ target: 'Blank Tuning', outputFilePath: blankFilePath });
 
     res.status(200).json(results);
 }

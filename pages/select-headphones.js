@@ -5,6 +5,7 @@ export default function SelectHeadphones() {
     const [headphones, setHeadphones] = useState([]);
     const [filteredHeadphones, setFilteredHeadphones] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [loading, setLoading] = useState(false);  // Loading state
     const router = useRouter();
 
     useEffect(() => {
@@ -25,34 +26,50 @@ export default function SelectHeadphones() {
         setFilteredHeadphones(filtered);
     };
 
-    const handleSelect = (event) => {
+    const handleSelect = async (event) => {
         const selectedHeadphone = event.target.value;
-        router.push(`/headphone-tuning?headphone=${selectedHeadphone}`);
+
+        if (selectedHeadphone) {
+            setLoading(true);  // Set loading to true when headphone is selected
+
+            // Call the API route to process the headphone and targets
+            const response = await fetch(`/api/process-headphone?headphone=${selectedHeadphone}`);
+            if (response.ok) {
+                router.push(`/headphone-tuning?headphone=${selectedHeadphone}`);
+            } else {
+                setLoading(false);  // Reset loading if something goes wrong
+            }
+        }
     };
 
     return (
-
-<>        <div className='selectheadphone'>
-            <h1>Select Your Headphones</h1>
-            <label className='text' htmlFor="headphone-search">Search your headphones:</label>
-            <input
-                type="text"
-                id="headphone-search"
-                value={searchTerm}
-                onChange={handleSearch}
-                placeholder="Type to search..."
-            />
-            <br />
-            <label className= 'text' htmlFor="headphones">Choose your headphones:</label>
-            <select id="headphones" name="headphones" onChange={handleSelect}>
-                <option value="">--Select a headphone--</option>
-                {filteredHeadphones.map((headphone, index) => (
-                    <option key={index} value={headphone}>
-                        {headphone}
-                    </option>
-                ))}
-            </select>
+        <div>
+            <div className='selectheadphone'>
+                <h1>Select Your Headphones</h1>
+                <label className='text' htmlFor="headphone-search">Search your headphones:</label>
+                <input
+                    type="text"
+                    id="headphone-search"
+                    value={searchTerm}
+                    onChange={handleSearch}
+                    placeholder="Type to search..."
+                />
+                <br />
+                <label className='text' htmlFor="headphones">Choose your headphones:</label>
+                <select id="headphones" name="headphones" onChange={handleSelect}>
+                    <option value="">--Select a headphone--</option>
+                    {filteredHeadphones.map((headphone, index) => (
+                        <option key={index} value={headphone}>
+                            {headphone}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            {loading && (
+                <div>
+                    <p>Loading... Please wait while we generate your EQ settings.</p>
+                </div>
+            )}
         </div>
-        </>
     );
 }

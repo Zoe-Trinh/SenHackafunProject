@@ -151,11 +151,17 @@ const Equalizer = (function() {
     let calc_distance = function (fr1, fr2) {
         let distance = 0;
         for (let i = 0; i < fr1.length; ++i) {
+            // Safety check: ensure fr2[i] exists and both fr1[i][1] and fr2[i][1] are defined
+            if (!fr2[i] || fr1[i][1] === undefined || fr2[i][1] === undefined) {
+                continue; // Skip this iteration if any value is undefined
+            }
+    
             let d = Math.abs(fr1[i][1] - fr2[i][1]);
             distance += (d >= 0.1 ? d : 0);
         }
         return distance / fr1.length;
     };
+    
 
     let filters_to_coeffs = function (filters, sampleRate) {
         return filters.map(f => {
@@ -219,6 +225,12 @@ const Equalizer = (function() {
         let [minFreq, maxFreq] = config.AutoEQRange;
         for (let i = 0; i < fr.length; ++i) {
             let [f, v0] = fr[i];
+            
+            // Safety check: ensure frTarget[i] exists
+            if (!frTarget[i] || !frTarget[i][1]) {
+                continue; // Skip this iteration if no corresponding frTarget value exists
+            }
+            
             let v1 = frTarget[i][1];
             let delta = v0 - v1;
             let deltaAbs = Math.abs(delta);
@@ -247,6 +259,7 @@ const Equalizer = (function() {
         }
         return candidates;
     };
+    
 
     let freq_unit = function (freq) {
         if (freq < 100) {
@@ -406,4 +419,4 @@ const Equalizer = (function() {
     }
 })();
 
-export default Equalizer;
+module.exports = Equalizer;
