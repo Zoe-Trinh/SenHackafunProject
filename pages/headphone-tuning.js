@@ -16,7 +16,7 @@ export default function HeadphoneTuning({ eqFiles }) {
     const audioRef = useRef();
     const router = useRouter();
 
-    const debuggingMode = true;
+    const debuggingMode = false;
 
     useEffect(() => {
         const context = new (window.AudioContext || window.webkitAudioContext)();
@@ -148,16 +148,17 @@ export default function HeadphoneTuning({ eqFiles }) {
         const winner = currentPair[selectedEQ === 'A' ? 0 : 1];
         setWinners([...winners, winner]);
         handleStop();
-
+    
         if (round === 7) {
-            alert(`Your favorite EQ is: ${winner.name}`);
-
+            router.push(`/listen?headphone=${router.query.headphone}&tuning=${winner.name}`);
         } else {
             setRound(round + 1);
             const nextPairIndex = round < 4 ? round : round - 4;
             setCurrentPair(pairs[nextPairIndex]);
         }
     };
+    
+    
 
     return (
         <div>
