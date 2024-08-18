@@ -161,7 +161,7 @@ export default function HeadphoneTuning({ csvData, eqFiles }) {
 
     return (
         <div>
-            <h1>Headphone Tuning - Round {round} of 7</h1>
+            <h1 className='selectheadphone'>Headphone Tuning - Round {round} of 7</h1>
             {debuggingMode && currentPair.length === 2 && (
                 <p>
                     A: {currentPair[0]?.name}, B: {currentPair[1]?.name}
@@ -212,3 +212,4 @@ export async function getServerSideProps(context) {
         },
     };
 }
+

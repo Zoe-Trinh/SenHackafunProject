@@ -5,18 +5,23 @@ body {
     color:#130f40;
 }
 header {
-    background-color:#99FF00;
-    color: #1D00FF;
+    background-color:#93B7BF;
+    color:#475459;
     padding: 10px;
     margin: -20px;
 }
 h1 {
     font-size: 70px;
     text-align: center;
-    color: #99FF00;
+    color: #475459;
 }
 .homeh1 {
-    color: #130f40;
+    color: #475459;
+}
+.topnav {
+    background-color: #93B7BF;
+    padding: 30px;
+    margin: -20px;
 }
 .dropdown {
     display:inline-flex;
@@ -24,32 +29,203 @@ h1 {
     width: 100%;
 }
 .dropdown button {
-    margin: 20px;
+    margin: 40px;
     margin-top: 70px;
-    padding: 50px;
+    padding: 40px;
     font-size: 30px;
-    border-radius: 20px;
-    background-color: #c7c7c5;
+    border-radius: 30px;
+    border-color:  30px solid #93B7BF;
+    background-color: #475459;
+    color: white;
+    cursor: pointer;
+}
+.dropdown button:hover {
+    background-color: #93B7BF;
+    color: black;
 }
 /*information page*/
+/* Style the tab */
+.tab {
+    margin-top: 30px;
+  float: left;
+  border: 1px solid #ccc;
+  background-color: #93B7BF;
+  width: 30%;
+  height: 300px;
+}
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.tab button:hover {
+  background-color: #ddd;
+}
+.tab button.active {
+  background-color: #dea8a8;
+}
+.tabcontent {
+  float: right;
+  padding: 0px 12px;
+  border: 1px solid #ccc;
+  width: 70%;
+  border-left: none;
+  height: 300px;
+  color: white;
+}
 /*select headphones*/
 .selectheadphone {
-    background-color: #0D0F40;
+    background-color: #93B7BF;
     padding: 30px;
-    color: #99FF00;
+    color: #475459;
 }
 #headphone-search, #headphones{
-    background-color: #cfd9c7;
+    background-color: #c7d2d9;
     margin: 30px;
     padding: 10px;
     border-radius: 10px;
     color: #130f40;
 }
 .text {
-    color:#99FF00;
+    color:#475459;
     font-size: 20px;
 }
 #playbar {
     float: right;
     padding: 20px;
+}
+#tuneNavBar{
+    list-style-type: none;
+    padding: 0.5vw 2vw 0 0;
+}
+
+#tuneNav{
+    display: inline;
+    padding: 0.5vw 1vw 0.5vw 1vw;
+    float: right;
+}
+
+#tuneNav:hover{
+    background-color: white;
+}
+
+#tuneLinkHome, #tuneLinkInfo{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+#tuneNavInfoDropDown{
+    position: relative;
+    display: inline-block;
+}
+
+#tuneNavInfoDropDownContent{
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    margin-top: 0.5vw;
+    right: -2.8vw;
+}
+
+#tuneNavInfoDropDown:hover #tuneNavInfoDropDownContent{
+    display: block;
+}
+
+#tuneNavInfoDropDownContent a{
+    text-decoration: none;
+    display: block;
+    color: black;
+    padding: 1vw 1vw 1vw 1vw;
+}
+
+#tuneNavInfoDropDownContent a:hover{
+    background-color: #f1f1f1;
+}
+
+input[type="range"] {
+    width: 50%;
+    height: 5px;
+    background: #ffffff;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* headphone demo page css*/
+#demodiv1, #demodiv5 {
+    margin-top: 20px;
+    padding: 50px;
+    border-radius: 20px;
+    background-color: #c7c7c5;
+}
+
+#demodiv2 {
+    display:flex; 
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+/* EQ Info*/
+
+#infonav {
+    width: fit-content;
+    background-color: black;
+    margin-top: 20px;
+    color: white;
+    border-radius: 20px;
+    border: 2px solid white;
+    padding: 10px;
+}
+
+#howeqbody {
+    display: flex;
+    flex-direction: row;
+}
+
+#howeqdiv1 {
+    margin-top: 20px;
+    margin-left:5px;
+    padding: 50px;
+    border-radius: 20px;
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+}
+
+#infoNavBar{
+    list-style-type: none;
+    padding: 5px;
+}
+
+#infoNav{
+    display: inline;
+    padding: 2px 2px 2px 2px;
+    float: right;
+    background-color: white;
+    width: 100%;
+}
+
+#infoNav:hover{
+    background-color: rgb(172, 200, 255);
+}
+
+#infoLinkHome{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+}
+
+#howeqdiv2 {
+    display: flex;
+    flex-direction: row;
 }

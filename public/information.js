@@ -1,15 +1,14 @@
-import Link from "next/link";
-
 export default function InformationPage() {
+
     return (
         <>
             <div className="topnav">
-                <Link href="/">Homepage</Link>
+                <a href="/hackafun">Homepage</a>
             </div>
                 <div className="tab">
-            <button class="tablinks" onclick="openContent(evt, 'Different Targets')">Different Targets</button>
-            <button class="tablinks" onclick="openContent(evt, 'How EQ Works')">How EQ Works</button>
-            <button class="tablinks" onclick="openContent(evt, 'Applying System EQ')">Applying System EQ</button>
+            <button class="tablinks" onclick={openContent(evt, 'Different Targets')}>Different Targets </button>
+            <button class="tablinks" onclick={openContent(evt, 'How EQ Works')}>How EQ Works</button>
+            <button class="tablinks" onclick={openContent(evt, 'Applying System EQ')}>Applying System EQ</button>
             </div>
 
             <div id="Different Targets" class="tabcontent">
@@ -46,7 +45,7 @@ export default function InformationPage() {
         </div>
     </nav>
     <div id="howeqdiv1">
-        <h1>Equalizer (EQ) Info</h1>
+        <h1 style="color: rgb(44, 243, 44);">Equalizer (EQ) Info</h1>
         <p>An equalizer (EQ) is a device or software used to adjust the the balance of different frequency components in an audio system.</p>
     
         <h2>How EQ Works</h2>
@@ -76,7 +75,7 @@ export default function InformationPage() {
                 <a href="https://blog.landr.com/eq-basics-everything-musicians-need-know-eq/">image source</a>
             </div>
         </div>
-        </div>
+    </div>
             </div>
 
             <div id="Applying System EQ" class="tabcontent">
@@ -85,5 +84,20 @@ export default function InformationPage() {
             function
             </div>
         </>
-    ); 
+    );
+
+
+    function openContent(evt, tablinks) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementsByClassName(title).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
 }
