@@ -15,6 +15,9 @@ export default function HomePage() {
                 <a href="/headphone-demos">
                     <button>Headphone demos</button>
                 </a>
+                <a href="/headphone-demos">
+                    <button>Volume Evaluation</button>
+                </a>
             </div>
         </>
     );

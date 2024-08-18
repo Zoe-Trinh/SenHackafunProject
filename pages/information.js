@@ -6,17 +6,6 @@ export default function InformationPage() {
             <div className="topnav">
                 <Link href="/">Homepage</Link>
             </div>
-                <div className="tab">
-            <button class="tablinks" onclick="openContent(evt, 'Different Targets')">Different Targets</button>
-            <button class="tablinks" onclick="openContent(evt, 'How EQ Works')">How EQ Works</button>
-            <button class="tablinks" onclick="openContent(evt, 'Applying System EQ')">Applying System EQ</button>
-            </div>
-
-            <div id="Different Targets" class="tabcontent">
-            <h3>Different Targets</h3>
-            <p>London is the capital city of England.</p>
-            </div>
-
             <div id="How EQ Works" class="tabcontent">
             <h3>How EQ Works</h3>
             <nav id="infonav">
@@ -72,17 +61,8 @@ export default function InformationPage() {
                     <li>Brilliance or Noise: 7kHz to 20kHz</li>
                 </ul>
             </div>
-            <div>
-                <a href="https://blog.landr.com/eq-basics-everything-musicians-need-know-eq/">image source</a>
-            </div>
         </div>
         </div>
-            </div>
-
-            <div id="Applying System EQ" class="tabcontent">
-            <h3>Applying System EQ</h3>
-            <p>Tokyo is the capital of Japan.</p>
-            function
             </div>
         </>
     ); 
