@@ -8,9 +8,9 @@ export default function HeadphoneTuning({ csvData }) {
     const { headphone } = router.query;
 
     return (
-        <div className='selectheadphone'>
+        <>
+        <div>
             <h1>Tuning for {headphone}</h1>
-
             <audio controls id='playbar'>
                 <source src="/data/Barney.mp3" type="audio/mpeg"/>
                 Your browser does not support the audio element.
@@ -18,6 +18,7 @@ export default function HeadphoneTuning({ csvData }) {
 
             <pre>{csvData}</pre>
         </div>
+        </>
     );
 }
 
