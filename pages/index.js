@@ -3,7 +3,7 @@ export default function HomePage() {
         <>
             <header>
                 <p>Sen Hackafun 2024</p>
-                <h1>Homepage</h1>
+                <h1 className="homeh1">Homepage</h1>
             </header>
             <div className="dropdown">
                 <a href="/information">
