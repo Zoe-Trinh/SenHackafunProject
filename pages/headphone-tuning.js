@@ -161,7 +161,13 @@ export default function HeadphoneTuning({ eqFiles }) {
 
     return (
         <div>
-            <h1 className='selectheadphone'>Headphone Tuning - Round {round} of 7</h1>
+            <h1>Headphone Tuning - Round {round} of 7</h1>
+            <div>
+                <p>
+                    Press "A" and "B" to listen to different EQ settings. Choose the one you prefer by clicking on "Select EQ A" or "Select EQ B".
+                    You can stop and restart playback anytime by clicking "&lt;&lt;&lt;"
+                </p>
+            </div>
             {debuggingMode && currentPair.length === 2 && (
                 <p>
                     A: {currentPair[0]?.name}, B: {currentPair[1]?.name}
@@ -208,4 +214,3 @@ export async function getServerSideProps(context) {
         },
     };
 }
-
