@@ -53,7 +53,6 @@ export default function HeadphoneTuning({ csvData, eqFiles }) {
 
     useEffect(() => {
         if (round > 4 && winners.length > 1) {
-
             const newPairs = [];
             for (let i = 0; i < winners.length; i += 2) {
                 newPairs.push([winners[i], winners[i + 1]]);
@@ -152,6 +151,7 @@ export default function HeadphoneTuning({ csvData, eqFiles }) {
 
         if (round === 7) {
             alert(`Your favorite EQ is: ${winner.name}`);
+
         } else {
             setRound(round + 1);
             const nextPairIndex = round < 4 ? round : round - 4;
@@ -160,17 +160,6 @@ export default function HeadphoneTuning({ csvData, eqFiles }) {
     };
 
     return (
-<<<<<<< HEAD
-        <>
-        <div>
-            <h1>Tuning for {headphone}</h1>
-            <audio controls id='playbar'>
-                <source src="/data/Barney.mp3" type="audio/mpeg"/>
-                Your browser does not support the audio element.
-            </audio>
-
-            <pre>{csvData}</pre>
-=======
         <div>
             <h1>Headphone Tuning - Round {round} of 7</h1>
             {debuggingMode && currentPair.length === 2 && (
@@ -199,9 +188,7 @@ export default function HeadphoneTuning({ csvData, eqFiles }) {
                     </div>
                 </>
             )}
->>>>>>> 33ea0d2cb7dbcb057f842640c5f4d1616597fed8
         </div>
-        </>
     );
 }
 
