@@ -31,11 +31,8 @@ export default function SelectHeadphones() {
     };
 
     return (
-        <>
-     <div className='selectheadphone'>
+        <div className='selectheadphone'>
             <h1>Select Your Headphones</h1>
-    </div>
-
             <label className='text' htmlFor="headphone-search">Search your headphones:</label>
             <input
                 type="text"
@@ -54,6 +51,6 @@ export default function SelectHeadphones() {
                     </option>
                 ))}
             </select>
-    </>
+        </div>
     );
 }
